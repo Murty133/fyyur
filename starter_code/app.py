@@ -47,10 +47,6 @@ class Venue(db.Model):
     genres = db.Column(db.ARRAY(db.String(120)))
     seeking_talent = db.Column(db.Boolean, nullable=False, default=False)
     seeking_description = db.Column(db.String(500))
-    # past_shows
-    # upcoming_shows
-    # past_shows_count = db.Column(db.Integer)
-    # upcoming_shows_count = db.Column(db.Integer)
     shows = db.relationship('Show', backref='venue', lazy=True)
 
 class Artist(db.Model):
@@ -69,10 +65,6 @@ class Artist(db.Model):
     website = db.Column(db.String(120))
     seeking_venue = db.Column(db.Boolean, nullable=False, default=False)
     seeking_description = db.Column(db.String(500))
-    # past_shows
-    # upcoming_shows
-    # past_shows_count = db.Column(db.Integer)
-    # upcoming_shows_count = db.Column(db.Integer)
     shows = db.relationship('Show', backref='artist', lazy=True)
 
 # TODO Implement Show and Artist models, and complete all model relationships and properties, as a database migration.
