@@ -6,6 +6,7 @@
 		<h1 class="monospace">
 			{{ artist.name }}
 		</h1>
+		<button id='edit-button' class="btn btn-primary btn-sm" data-id="{{artist.id}}">Edit Artist</button>
 		<p class="subtitle">
 			ID: {{ artist.id }}
 		</p>
@@ -40,7 +41,7 @@
 		{% endif %}
 	</div>
 	<div class="col-sm-6">
-		<img src="{{ artist.image_link }}" alt="Venue Image" />
+		<img src="{{ artist.image_link }}" alt="Artist Image" />
 	</div>
 </div>
 <section>
@@ -71,6 +72,20 @@
 		{% endfor %}
 	</div>
 </section>
+
+<script>
+	EditButton = document.getElementById("edit-button")
+	EditButton.onclick = function(e) {
+		const artistId = e.target.dataset.id;
+		fetch('/venues/' + artistId + '/edit', {
+			method: 'GET'
+		}).then(function(response){
+			window.location.href = '/artists/' + artistId + '/edit';
+		}).catch(function(e) {
+			console.error(e);
+		});
+	};
+</script>
 
 {% endblock %}
 
