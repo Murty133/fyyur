@@ -7,6 +7,7 @@
 			{{ artist.name }}
 		</h1>
 		<button id='edit-button' class="btn btn-primary btn-sm" data-id="{{artist.id}}">Edit Artist</button>
+		<button id='delete-button' class="btn btn-primary btn-sm" data-id="{{artist.id}}">Delete Artist</button>
 		<p class="subtitle">
 			ID: {{ artist.id }}
 		</p>
@@ -74,8 +75,20 @@
 </section>
 
 <script>
-	EditButton = document.getElementById("edit-button")
-	EditButton.onclick = function(e) {
+	deleteButton = document.getElementById("delete-button")
+	deleteButton.onclick = function(e) {
+		const artistId = e.target.dataset.id;
+		fetch('/artists/' + artistId, {
+		method: 'DELETE'
+		}).then(function(response){
+			window.location.href = '/artists';
+		}).catch(function(e) {
+			console.error(e);
+		});
+	};
+
+	editButton = document.getElementById("edit-button")
+	editButton.onclick = function(e) {
 		const artistId = e.target.dataset.id;
 		fetch('/venues/' + artistId + '/edit', {
 			method: 'GET'

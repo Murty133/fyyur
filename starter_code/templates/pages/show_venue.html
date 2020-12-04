@@ -1,13 +1,13 @@
 {% extends 'layouts/main.html' %}
-{% block title %}Venue Search{% endblock %}
+{% block title %}{{venue.name}} | Venue{% endblock %}
 {% block content %}
 <div class="row">
 	<div class="col-sm-6">
 		<h1 class="monospace">
 			{{ venue.name }}
 		</h1>
-		<button id='delete-button' class="btn btn-primary btn-sm" data-id="{{venue.id}}">Delete Venue</button>
 		<button id='edit-button' class="btn btn-primary btn-sm" data-id="{{venue.id}}">Edit Venue</button>
+		<button id='delete-button' class="btn btn-primary btn-sm" data-id="{{venue.id}}">Delete Venue</button>
 		<p class="subtitle">
 			ID: {{ venue.id }}
 		</p>
@@ -84,14 +84,14 @@
 		fetch('/venues/' + venueId, {
 		method: 'DELETE'
 		}).then(function(response){
-			window.location.href = '/';
+			window.location.href = '/venues';
 		}).catch(function(e) {
 			console.error(e);
 		});
 	};
 
-	EditButton = document.getElementById("edit-button")
-	EditButton.onclick = function(e) {
+	editButton = document.getElementById("edit-button")
+	editButton.onclick = function(e) {
 		const venueId = e.target.dataset.id;
 		fetch('/venues/' + venueId + '/edit', {
 			method: 'GET'
